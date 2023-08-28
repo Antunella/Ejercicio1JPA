@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,8 +19,20 @@ public class Persona implements Serializable {
     private String nombre;
     private String apellido;
     private int edad;
-    // RELACION ONE TO ONE UNIDIRECCIONAL
-// El Cascadeo propaga las operaciones y orphanRemoval asegura que se elimine la relacionada
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) @JoinColumn(name = "domicilio_id")
-    private Domicilio domicilio;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @JoinColumn(name = "persona_id")
+    @Builder.Default
+    private List<Domicilio> domicilios = new ArrayList<>();
+
+    public void agregarDomicilio(Domicilio domi){
+        domicilios.add(domi);
+    }
+    public void mostrarDomicilios() {
+        System.out.println("Domicilios de " + nombre + " " + apellido +
+                ":");
+        for (Domicilio domicilio : domicilios) {
+            System.out.println("Calle: " + domicilio.getCalle() + ", Número: " + domicilio.getNumero());
+        }
+    }
 }

@@ -15,7 +15,4 @@ public class Domicilio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String calle;
     private int numero;
-
-    @OneToOne(mappedBy = "domicilio")
-    private Persona persona;
 }
