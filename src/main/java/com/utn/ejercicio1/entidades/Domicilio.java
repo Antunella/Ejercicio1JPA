@@ -5,9 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -19,7 +16,7 @@ public class Domicilio implements Serializable {
     private String calle;
     private int numero;
 
-    @ManyToMany(mappedBy = "domicilios")
-    @Builder.Default
-    private Set<Persona> personas = new HashSet<>();
+    @ManyToOne()
+    @JoinColumn(name = "persona_id")
+    private Persona persona;
 }

@@ -1,12 +1,12 @@
 package com.utn.ejercicio1.entidades;
 import jakarta.persistence.*;
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -20,17 +20,10 @@ public class Persona implements Serializable {
     private String apellido;
     private int edad;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST,
-            CascadeType.MERGE })
-    @JoinTable(
-            name = "persona_domicilio",
-            joinColumns = @JoinColumn(name = "persona_id"),
-            inverseJoinColumns = @JoinColumn(name =
-                    "domicilio_id")
-    )
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @JoinColumn(name = "persona_id")
     @Builder.Default
-    @EqualsAndHashCode.Exclude
-    private Set<Domicilio> domicilios = new HashSet<>();
+    private List<Domicilio> domicilios = new ArrayList<>();
 
     public void agregarDomicilio(Domicilio domi){
         domicilios.add(domi);
