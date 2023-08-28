@@ -15,4 +15,8 @@ public class Domicilio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String calle;
     private int numero;
+
+    @ManyToOne()
+    @JoinColumn(name = "persona_id")
+    private Persona persona;
 }
