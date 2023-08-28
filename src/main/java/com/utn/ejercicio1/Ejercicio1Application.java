@@ -43,6 +43,7 @@ Finalmente, build() crea la instancia
 			domicilio1.setPersona(persona);
 			domicilio2.setPersona(persona);
 			// Guardar el objeto Persona en la base de datos
+
 			personaRepository.save(persona);
 // Recuperar el objeto Persona desde la base de datos
 			Persona personaRecuperada = personaRepository.findById(persona.getId()).orElse(null);
