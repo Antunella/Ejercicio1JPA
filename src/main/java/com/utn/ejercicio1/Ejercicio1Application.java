@@ -31,27 +31,19 @@ Finalmente, build() crea la instancia
 			Domicilio domicilio2 = Domicilio.builder() .calle("Calle 2")
 					.numero(456)
 					.build();
-			Domicilio domicilio3 = Domicilio.builder() .calle("Calle 3")
-					.numero(789)
-					.build();
 // Crear instancias de Persona y agregar domicilios
 			Persona persona1 = Persona.builder() .nombre("Juan")
 					.apellido("Pérez")
 					.edad(30)
 					.build();
-			Persona persona2 = Persona.builder() .nombre("María")
-					.apellido("Gómez")
-					.edad(25)
-					.build();
 // Agregar domicilios a las personas
 			persona1.agregarDomicilio(domicilio1);
 			persona1.agregarDomicilio(domicilio2);
-			persona2.agregarDomicilio(domicilio3);
 // Asignar las personas a los domicilios
-			domicilio1.getPersonas().add(persona1); domicilio2.getPersonas().add(persona1); domicilio3.getPersonas().add(persona2);
+			domicilio1.getPersonas().add(persona1); domicilio2.getPersonas().add(persona1);
 // Guardar las personas y los domicilios en la base de datos
 			personaRepository.save(persona1);
-			personaRepository.save(persona2);
+
 		}; }
 
 }
